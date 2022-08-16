@@ -13,7 +13,10 @@ namespace func_rocket
 				new Rocket(new Vector(200, 500), Vector.Zero, -0.5 * Math.PI),
 				new Vector(600, 200), 
 				(size, v) => Vector.Zero, standardPhysics);
-			//TODO: ...
-		}
+			yield return new Level("Heavy",
+                new Rocket(new Vector(200, 500), Vector.Zero, -0.5 * Math.PI),
+                new Vector(600, 200),
+                (size, v) => Vector.Zero, standardPhysics);
+        }
 	}
 }

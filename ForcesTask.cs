@@ -12,7 +12,7 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce GetThrustForce(double forceValue)
 		{
-			return r => new Vector(forceValue * Math.Cos(r.Direction), forceValue * r.Direction);
+			return r => new Vector(forceValue * Math.Cos(r.Direction), forceValue * Math.Sin(r.Direction));
 		}
 
 		/// <summary>
@@ -33,13 +33,16 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce Sum(params RocketForce[] forces)
 		{
-
-            var res = forces[0];
-            for (int i = 1; i < forces.Length; i++)
-            {
-                res += forces[i];
-            }
-            return res;
+			return r=>
+			{
+				var forsesSum = Vector.Zero;
+                for (int i = 0; i < forces.Length; i++)
+                {
+                    var j = i;
+                    forsesSum += (Vector)forces[j].Invoke(r);
+                }
+				return forsesSum;
+            };
         }
 	}
 }
