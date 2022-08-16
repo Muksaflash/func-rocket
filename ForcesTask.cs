@@ -14,18 +14,12 @@ namespace func_rocket
 		{
 			return r => new Vector(forceValue * Math.Cos(r.Direction), forceValue * Math.Sin(r.Direction));
 		}
-
 		/// <summary>
 		/// Преобразует делегат силы гравитации, в делегат силы, действующей на ракету
 		/// </summary>
 		public static RocketForce ConvertGravityToForce(Gravity gravity, Size spaceSize)
 		{
-			return r =>
-			{
-				var n = r.Location;
-				var t = gravity(spaceSize, r.Location);
-				 return t;
-			};
+			return r => gravity(spaceSize, r.Location);
 		}
 
 		/// <summary>
